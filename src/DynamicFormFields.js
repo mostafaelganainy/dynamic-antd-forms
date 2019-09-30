@@ -7,7 +7,7 @@ import { getAntDValidationRulesFromOptions } from "./FormItems/validationHelpers
 
 const { TextArea } = Input;
 
-function DeclarativeFormFields({ form, fields, disableAll, intl, formValues }) {
+function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
   const { getFieldDecorator } = form;
 
   const getInjectedProps = (field, formValues) => {
@@ -99,4 +99,4 @@ function DeclarativeFormFields({ form, fields, disableAll, intl, formValues }) {
   );
 }
 
-export default DeclarativeFormFields;
+export default DynamicFormFields;

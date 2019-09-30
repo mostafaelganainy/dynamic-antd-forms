@@ -4,9 +4,9 @@ import _ from "lodash";
 
 import { Form, Button } from "antd";
 
-import FormFields from "./DeclarativeFormFields";
+import FormFields from "./DynamicFormFields";
 
-function DeclarativeForm({ form, fields, viewMode, handleSubmit, formValues }) {
+function DynamicForm({ form, fields, viewMode, handleSubmit, formValues }) {
   const excuteAction = e => {
     e.preventDefault();
     form.validateFields((err, values) => {
@@ -37,4 +37,4 @@ export default Form.create({
   onValuesChange(props, values) {
     props.onChange(values);
   }
-})(DeclarativeForm);
+})(DynamicForm);

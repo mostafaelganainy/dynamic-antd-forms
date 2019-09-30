@@ -2,9 +2,9 @@ import React, { useState, useCallback } from "react";
 
 import _ from "lodash";
 
-import DeclarativeForm from "./DeclarativeForm";
+import DynamicForm from "./DynamicForm";
 
-function DeclarativeFormContainer({
+function DynamicFormContainer({
   fields,
   viewMode,
   handleSubmit,
@@ -20,7 +20,7 @@ function DeclarativeFormContainer({
   );
 
   return (
-    <DeclarativeForm
+    <DynamicForm
       fields={fields}
       viewMode={viewMode}
       handleSubmit={handleSubmit}
@@ -30,4 +30,4 @@ function DeclarativeFormContainer({
   );
 }
 
-export default DeclarativeFormContainer;
+export default DynamicFormContainer;
