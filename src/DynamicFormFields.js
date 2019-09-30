@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import _ from "lodash";
 
 import { Form, Input, Switch, InputNumber } from "antd";
+import Select from "./FormItems/Select/Select";
 
 import { getAntDValidationRulesFromOptions } from "./FormItems/validationHelpers";
 
@@ -77,6 +78,9 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
         disabled={disableAll}
         {...getInjectedProps(field, formValues)}
       />
+    ),
+    SELECT: (field, formValues) => (
+      <Select field={field} {...getInjectedProps(field, formValues)} />
     )
   };
   return (
