@@ -8,6 +8,7 @@ function DynamicFormContainer({
   fields,
   viewMode,
   handleSubmit,
+  handleCancel,
   initialFormData
 }) {
   const [formValues, setFormValues] = useState(initialFormData || {});
@@ -24,6 +25,7 @@ function DynamicFormContainer({
       fields={fields}
       viewMode={viewMode}
       handleSubmit={handleSubmit}
+      handleCancel={handleCancel}
       formValues={formValues}
       onChange={onChange}
     />

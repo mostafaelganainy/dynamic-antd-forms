@@ -6,7 +6,14 @@ import { Form, Button } from "antd";
 
 import FormFields from "./DynamicFormFields";
 
-function DynamicForm({ form, fields, viewMode, handleSubmit, formValues }) {
+function DynamicForm({
+  form,
+  fields,
+  viewMode,
+  handleSubmit,
+  handleCancel,
+  formValues
+}) {
   const excuteAction = e => {
     e.preventDefault();
     form.validateFields((err, values) => {
@@ -26,7 +33,9 @@ function DynamicForm({ form, fields, viewMode, handleSubmit, formValues }) {
         <Button type="primary" htmlType="submit" disabled={viewMode}>
           Save
         </Button>
-        <Button style={{ marginLeft: 8 }}>Cancel</Button>
+        <Button style={{ marginLeft: 8 }} onClick={handleCancel}>
+          Cancellll555
+        </Button>
       </Form.Item>
     </Form>
   );
