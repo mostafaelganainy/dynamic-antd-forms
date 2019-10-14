@@ -12,13 +12,16 @@ function DynamicForm({
   viewMode,
   handleSubmit,
   handleCancel,
-  formValues
+  formValues,
+  controlled
 }) {
   const excuteAction = e => {
     e.preventDefault();
-    form.validateFields((err, values) => {
-      handleSubmit(values);
-    });
+    if (!controlled) {
+      form.validateFields((err, values) => {
+        handleSubmit(values);
+      });
+    }
   };
 
   return (
@@ -29,14 +32,16 @@ function DynamicForm({
         disableAll={viewMode}
         formValues={formValues}
       />
-      <Form.Item>
-        <Button type="primary" htmlType="submit" disabled={viewMode}>
-          Save
-        </Button>
-        <Button style={{ marginLeft: 8 }} onClick={handleCancel}>
-          Cancellll555
-        </Button>
-      </Form.Item>
+      {!controlled ? (
+        <Form.Item>
+          <Button type="primary" htmlType="submit" disabled={viewMode}>
+            Save
+          </Button>
+          <Button style={{ marginLeft: 8 }} onClick={handleCancel}>
+            Cancel
+          </Button>
+        </Form.Item>
+      ) : null}
     </Form>
   );
 }

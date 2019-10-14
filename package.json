@@ -41,6 +41,7 @@
     "webpack-cli": "^3.3.7"
   },
   "dependencies": {
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2"
   }
 }

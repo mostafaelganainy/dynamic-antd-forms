@@ -85,7 +85,7 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
   };
   return (
     <React.Fragment>
-      {console.log({ fields })}
+      {/* {console.log({ fields })} */}
       {fields.map(
         fieldOptions =>
           typesMap[fieldOptions.type] &&
