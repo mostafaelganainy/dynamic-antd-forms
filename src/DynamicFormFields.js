@@ -24,9 +24,7 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
   const shouldRenderField = field =>
     !field.dependencies?.displayConditions ||
     field.dependencies?.displayConditions?.every(condition => {
-      const targetPropertyValue = _.get(formValues, condition.propertyName);
-
-      console.log({ targetPropertyValue, condition, formValues });
+      const targetPropertyValue = _.get(formValues, condition.propertyName);      
 
       switch (condition.operation) {
         case "NOT_NULL":
@@ -85,7 +83,6 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
   };
   return (
     <React.Fragment>
-      {/* {console.log({ fields })} */}
       {fields.map(
         fieldOptions =>
           typesMap[fieldOptions.type] &&
