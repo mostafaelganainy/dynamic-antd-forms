@@ -6,12 +6,22 @@ import { Form, Button } from "antd";
 
 import FormFields from "./DynamicFormFields";
 
-function DynamicForm({ form, fields, viewMode, handleSubmit, formValues }) {
+function DynamicForm({
+  form,
+  fields,
+  viewMode,
+  handleSubmit,
+  handleCancel,
+  formValues,
+  controlled
+}) {
   const excuteAction = e => {
     e.preventDefault();
-    form.validateFields((err, values) => {
-      handleSubmit(values);
-    });
+    if (!controlled) {
+      form.validateFields((err, values) => {
+        handleSubmit(values);
+      });
+    }
   };
 
   return (
@@ -22,12 +32,16 @@ function DynamicForm({ form, fields, viewMode, handleSubmit, formValues }) {
         disableAll={viewMode}
         formValues={formValues}
       />
-      <Form.Item>
-        <Button type="primary" htmlType="submit" disabled={viewMode}>
-          Save
-        </Button>
-        <Button style={{ marginLeft: 8 }}>Cancel</Button>
-      </Form.Item>
+      {!controlled ? (
+        <Form.Item>
+          <Button type="primary" htmlType="submit" disabled={viewMode}>
+            Save
+          </Button>
+          <Button style={{ marginLeft: 8 }} onClick={handleCancel}>
+            Cancel
+          </Button>
+        </Form.Item>
+      ) : null}
     </Form>
   );
 }

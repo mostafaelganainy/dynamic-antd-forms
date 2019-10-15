@@ -59,8 +59,8 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
     ),
     SPINNER_INPUT: (field, formValues) => (
       <InputNumber
-        min={field.fieldParams.minValue}
-        max={field.fieldParams.maxValue}
+        min={field.fieldParams?.minValue}
+        max={field.fieldParams?.maxValue}
         disabled={disableAll}
         {...getInjectedProps(field, formValues)}
       />
@@ -85,7 +85,7 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
   };
   return (
     <React.Fragment>
-      {console.log({ fields })}
+      {/* {console.log({ fields })} */}
       {fields.map(
         fieldOptions =>
           typesMap[fieldOptions.type] &&

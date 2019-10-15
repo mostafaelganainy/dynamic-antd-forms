@@ -1,6 +1,6 @@
 {
   "name": "dynamic-antd-forms",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "AntD based forms generated from declarative json description",
   "main": "dist/index.js",
   "scripts": {
@@ -41,6 +41,7 @@
     "webpack-cli": "^3.3.7"
   },
   "dependencies": {
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2"
   }
 }

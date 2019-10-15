@@ -35,7 +35,7 @@ export const getAntDValidationRulesFromOptions = (
   fieldOptions,
   intl = { formatMessage: () => "CHANGE ME" }
 ) =>
-  fieldOptions.validations.map(validation => {
+  fieldOptions.validations?.map(validation => {
     const template =
       // TODO : Give a meaningful error on missing operation
       //ValidationTemplates[validation.operation] &&
