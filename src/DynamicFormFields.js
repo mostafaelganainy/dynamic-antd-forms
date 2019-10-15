@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import _ from "lodash";
 
-import { Form, Input, Switch, InputNumber } from "antd";
-import Select from "./FormItems/Select/Select";
+import { Form, Input, Switch, InputNumber, Select } from "antd";
 
 import { getAntDValidationRulesFromOptions } from "./FormItems/validationHelpers";
 
@@ -80,12 +79,20 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
       />
     ),
     SELECT: (field, formValues) => (
-      <Select field={field} {...getInjectedProps(field, formValues)} />
+      <Select>
+        {field.options?.map(dataOption => (
+          <Select.Option
+            key={dataOption.value.id || dataOption.value}
+            value={dataOption.value}
+          >
+            {dataOption.label}
+          </Select.Option>
+        ))}
+      </Select>
     )
   };
   return (
     <React.Fragment>
-      {/* {console.log({ fields })} */}
       {fields.map(
         fieldOptions =>
           typesMap[fieldOptions.type] &&
