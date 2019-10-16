@@ -80,7 +80,7 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
       <Select>
         {field.options?.map(dataOption => (
           <Select.Option
-            key={dataOption.value.id || dataOption.value}
+            key={dataOption.key}
             value={dataOption.value}
           >
             {dataOption.label}
