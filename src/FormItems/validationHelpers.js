@@ -28,18 +28,25 @@ const ValidationTemplates = {
       }
       callback();
     }
+  }),
+  CUSTOM_VALIDATION: (intl, fieldOptions, validation) => ({
+    validator: validation.params.validator
   })
 };
 
 export const getAntDValidationRulesFromOptions = (
   fieldOptions,
-  intl = { formatMessage: () => "CHANGE ME" }
+  intl = { formatMessage: () => "CHANGE ME" } //
 ) =>
   fieldOptions.validations?.map(validation => {
-    const template =
-      // TODO : Give a meaningful error on missing operation
-      //ValidationTemplates[validation.operation] &&
-      ValidationTemplates[validation.operation](intl, fieldOptions, validation);
+    // TODO : Give a meaningful error on missing operation
+    const template = ValidationTemplates[validation.operation]
+      ? ValidationTemplates[validation.operation](
+          intl,
+          fieldOptions,
+          validation
+        )
+      : [];
 
     return template;
   });
