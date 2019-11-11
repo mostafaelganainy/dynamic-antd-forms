@@ -15,15 +15,13 @@ function DynamicFormContainer({
 }) {
   const [formValues, setFormValues] = useState(initialFormData || {});
 
-  const onChange = useCallback(
-    changedFieldValues => {
-      setFormValues(_.assign(formValues, changedFieldValues));
-      if (controlled) {
-        handleChange(formValues);
-      }
-    },
-    [formValues]
-  );
+  const onChange = changedFieldValues => {
+    const newFormValues = _.assign({}, formValues, changedFieldValues);
+    setFormValues(newFormValues);
+    if (controlled) {
+      handleChange(newFormValues);
+    }
+  };
 
   return (
     <DynamicForm
