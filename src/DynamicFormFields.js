@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import _ from "lodash";
 
-import { Form, Input, Switch, InputNumber, Select } from "antd";
+import {
+  Form,
+  Input,
+  Switch,
+  InputNumber,
+  Select,
+  Upload,
+  Button,
+  Icon
+} from "antd";
 
 import { getAntDValidationRulesFromOptions } from "./FormItems/validationHelpers";
 
 const { TextArea } = Input;
+
+const dummyRequest = ({ file, onSuccess }) => {
+  setTimeout(() => {
+    onSuccess("ok");
+  }, 0);
+};
 
 function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
   const { getFieldDecorator } = form;
@@ -23,7 +38,7 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
   const shouldRenderField = field =>
     !field.dependencies?.displayConditions ||
     field.dependencies?.displayConditions?.every(condition => {
-      const targetPropertyValue = _.get(formValues, condition.propertyName);      
+      const targetPropertyValue = _.get(formValues, condition.propertyName);
 
       switch (condition.operation) {
         case "NOT_NULL":
@@ -79,15 +94,27 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
     SELECT: (field, formValues) => (
       <Select>
         {field.options?.map(dataOption => (
-          <Select.Option
-            key={dataOption.key}
-            value={dataOption.value}
-          >
+          <Select.Option key={dataOption.key} value={dataOption.value}>
             {dataOption.label}
           </Select.Option>
         ))}
       </Select>
-    )
+    ),
+    FILE: (field, formValues) => {
+      return (
+        <Upload
+          customRequest={dummyRequest}
+          name={field.name}
+          accept=".csv" // TODO
+          beforeUpload={() => true} // TODO
+          multiple={false}
+        >
+          <Button>
+            <Icon type="upload" /> Upload CSV
+          </Button>
+        </Upload>
+      );
+    }
   };
   return (
     <React.Fragment>
@@ -99,7 +126,7 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
               {getFieldDecorator(fieldOptions.name, {
                 rules: getAntDValidationRulesFromOptions(fieldOptions, intl),
                 initialValue:
-                  formValues[(fieldOptions?.name)] || fieldOptions.defaultValue
+                  formValues[fieldOptions?.name] || fieldOptions.defaultValue
               })(typesMap[fieldOptions.type](fieldOptions, formValues))}
             </Form.Item>
           )
