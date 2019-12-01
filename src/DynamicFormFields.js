@@ -114,8 +114,21 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
           </Button>
         </Upload>
       );
+    },
+    CUSTOM: (field, formValues) => {
+      return field.renderer;
     }
   };
+
+  const resolveFieldValuePropName = fieldOptions => {
+    // We need to do this to avoid antd console error. Upload doesn't accept 'value'(default) as options.valuePropName
+    return fieldOptions?.type === "FILE"
+      ? {
+          valuePropName: "file" // TODO: should handle it so that we can support file && fileList
+        }
+      : {};
+  };
+
   return (
     <React.Fragment>
       {fields.map(
@@ -124,6 +137,7 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
           shouldRenderField(fieldOptions, formValues) && (
             <Form.Item key={fieldOptions.name} label={fieldOptions.label}>
               {getFieldDecorator(fieldOptions.name, {
+                ...resolveFieldValuePropName(fieldOptions),
                 rules: getAntDValidationRulesFromOptions(fieldOptions, intl),
                 initialValue:
                   formValues[fieldOptions?.name] || fieldOptions.defaultValue

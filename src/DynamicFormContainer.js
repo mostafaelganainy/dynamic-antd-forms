@@ -11,7 +11,8 @@ function DynamicFormContainer({
   handleCancel,
   initialFormData,
   controlled,
-  handleChange
+  handleChange,
+  antProps
 }) {
   const [formValues, setFormValues] = useState(initialFormData || {});
 
@@ -32,6 +33,7 @@ function DynamicFormContainer({
       formValues={formValues}
       onChange={onChange}
       controlled={controlled}
+      antProps={antProps}
     />
   );
 }

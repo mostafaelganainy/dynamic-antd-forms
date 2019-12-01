@@ -13,7 +13,8 @@ function DynamicForm({
   handleSubmit,
   handleCancel,
   formValues,
-  controlled
+  controlled,
+  antProps
 }) {
   const excuteAction = e => {
     e.preventDefault();
@@ -25,7 +26,7 @@ function DynamicForm({
   };
 
   return (
-    <Form onSubmit={excuteAction}>
+    <Form onSubmit={excuteAction} {...antProps}>
       <FormFields
         form={form}
         fields={fields}
