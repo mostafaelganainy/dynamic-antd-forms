@@ -7,6 +7,7 @@ import {
   Switch,
   InputNumber,
   Select,
+  TreeSelect,
   Upload,
   Button,
   Icon
@@ -84,12 +85,8 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
         {...getInjectedProps(field, formValues)}
       />
     ),
-    BOOLEAN: (field, formValues) => (
-      <Switch
-        defaultChecked={field.defaultValue}
-        disabled={disableAll}
-        {...getInjectedProps(field, formValues)}
-      />
+    SWITCH: (field, formValues) => (
+      <Switch disabled={disableAll} {...getInjectedProps(field, formValues)} />
     ),
     SELECT: (field, formValues) => (
       <Select>
@@ -99,6 +96,14 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
           </Select.Option>
         ))}
       </Select>
+    ),
+    TREE_SELECT: (field, formValues) => (
+      <TreeSelect
+        dropdownClassName="lolo_dropdown"
+        treeData={field.treeData}
+        placeholder={field.placeholder}
+        treeDefaultExpandAll
+      />
     ),
     FILE: (field, formValues) => {
       return (
@@ -122,11 +127,15 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
 
   const resolveFieldValuePropName = fieldOptions => {
     // We need to do this to avoid antd console error. Upload doesn't accept 'value'(default) as options.valuePropName
-    return fieldOptions?.type === "FILE"
-      ? {
-          valuePropName: "file" // TODO: should handle it so that we can support file && fileList
-        }
-      : {};
+    switch (fieldOptions?.type) {
+      case "FILE":
+        // TODO: should handle it so that we can support file && fileList
+        return { valuePropName: "file" };
+      case "SWITCH":
+        return { valuePropName: "checked" };
+      default:
+        return {};
+    }
   };
 
   return (
