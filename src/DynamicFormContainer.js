@@ -18,7 +18,6 @@ function DynamicFormContainer({
   const [formValues, setFormValues] = useState(initialFormData || {});
 
   const onChange = changedFieldValues => {
-    // koko
     const newFormValues = _.assign({}, formValues, changedFieldValues);
     setFormValues(newFormValues);
     if (controlled) {
