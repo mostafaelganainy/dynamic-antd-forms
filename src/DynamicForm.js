@@ -14,7 +14,8 @@ function DynamicForm({
   handleCancel,
   formValues,
   controlled,
-  antProps
+  antProps,
+  handleErrors
 }) {
   const excuteAction = e => {
     e.preventDefault();
@@ -49,7 +50,12 @@ function DynamicForm({
 
 export default Form.create({
   name: "data_source_form",
-  onValuesChange(props, values) {
-    props.onChange(values);
+  onValuesChange: (props, changedValues, allValues) => {
+    props.onChange(changedValues);
+  },
+  onFieldsChange: (props, changedFields, allFields) => {
+    const fieldsKeyValue = Object.entries(allFields);
+    const predicate = field => _.get(field, "[1].errors.length") > 0;
+    props.onErrors(fieldsKeyValue.filter(predicate).map(field => field[1]));
   }
 })(DynamicForm);

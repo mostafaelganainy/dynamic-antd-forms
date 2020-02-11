@@ -72,8 +72,8 @@ function DynamicFormFields({ form, fields, disableAll, intl, formValues }) {
     ),
     SPINNER_INPUT: (field, formValues) => (
       <InputNumber
-        min={field.fieldParams?.minValue}
-        max={field.fieldParams?.maxValue}
+        min={_.get(field, "fieldParams[0].minValue")}
+        max={_.get(field, "fieldParams[0].maxValue")}
         disabled={disableAll}
         {...getInjectedProps(field, formValues)}
       />

@@ -12,11 +12,13 @@ function DynamicFormContainer({
   initialFormData,
   controlled,
   handleChange,
-  antProps
+  antProps,
+  onErrors
 }) {
   const [formValues, setFormValues] = useState(initialFormData || {});
 
   const onChange = changedFieldValues => {
+    // koko
     const newFormValues = _.assign({}, formValues, changedFieldValues);
     setFormValues(newFormValues);
     if (controlled) {
@@ -34,6 +36,7 @@ function DynamicFormContainer({
       onChange={onChange}
       controlled={controlled}
       antProps={antProps}
+      onErrors={onErrors}
     />
   );
 }
