@@ -12,7 +12,8 @@ function DynamicFormContainer({
   initialFormData,
   controlled,
   handleChange,
-  antProps
+  antProps,
+  onErrors
 }) {
   const [formValues, setFormValues] = useState(initialFormData || {});
 
@@ -34,6 +35,7 @@ function DynamicFormContainer({
       onChange={onChange}
       controlled={controlled}
       antProps={antProps}
+      onErrors={onErrors}
     />
   );
 }
