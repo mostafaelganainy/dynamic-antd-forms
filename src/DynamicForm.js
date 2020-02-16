@@ -1,61 +1,38 @@
 import React from "react";
-
 import _ from "lodash";
-
-import { Form, Button } from "antd";
+import { Form } from "antd";
 
 import FormFields from "./DynamicFormFields";
+import shouldSubmit from "./utils/shouldSubmit";
 
-function DynamicForm({
-  form,
-  fields,
-  viewMode,
-  handleSubmit,
-  handleCancel,
-  formValues,
-  controlled,
-  antProps,
-  handleErrors
-}) {
-  const excuteAction = e => {
-    e.preventDefault();
-    if (!controlled) {
-      form.validateFields((err, values) => {
-        handleSubmit(values);
-      });
-    }
+const DynamicForm = props => {
+  const handleSubmit = e => {
+    e.preventDefault(); // TODO: should we assume this ??
+    props.form.validateFields();
+
+    if (shouldSubmit(props.form.getFieldsError()))
+      props.onSubmit?.(props.form.getFieldsValue());
   };
 
   return (
-    <Form onSubmit={excuteAction} {...antProps}>
+    <Form onSubmit={handleSubmit} id={props.formId}>
       <FormFields
-        form={form}
-        fields={fields}
-        disableAll={viewMode}
-        formValues={formValues}
+        form={props.form}
+        fields={props.fields}
+        defaultValues={props.defaultValues}
       />
-      {!controlled ? (
-        <Form.Item>
-          <Button type="primary" htmlType="submit" disabled={viewMode}>
-            Save
-          </Button>
-          <Button style={{ marginLeft: 8 }} onClick={handleCancel}>
-            Cancel
-          </Button>
-        </Form.Item>
-      ) : null}
     </Form>
   );
-}
+};
 
 export default Form.create({
   name: "data_source_form",
   onValuesChange: (props, changedValues, allValues) => {
-    props.onChange(changedValues);
+    props.onChange?.(allValues);
   },
   onFieldsChange: (props, changedFields, allFields) => {
     const fieldsKeyValue = Object.entries(allFields);
     const predicate = field => _.get(field, "[1].errors.length") > 0;
-    props.onErrors(fieldsKeyValue.filter(predicate).map(field => field[1]));
+    props.onErrors?.(fieldsKeyValue.filter(predicate).map(field => field[1]));
   }
 })(DynamicForm);

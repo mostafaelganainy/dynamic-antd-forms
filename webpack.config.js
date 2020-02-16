@@ -90,12 +90,6 @@ module.exports = {
       commonjs2: "classnames",
       amd: "classnames",
       root: "classnames"
-    },
-    "prop-types": {
-      commonjs: "prop-types",
-      commonjs2: "prop-types",
-      amd: "prop-types",
-      root: "prop-types"
     }
   }
 };
