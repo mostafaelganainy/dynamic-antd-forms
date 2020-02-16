@@ -1,3 +1,3 @@
-import DynamicFormContainer from "./DynamicFormContainer";
+import DynamicForm from "./DynamicForm";
 
-export { DynamicFormContainer as Form };
+export default DynamicForm;
