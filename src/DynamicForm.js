@@ -15,7 +15,7 @@ const DynamicForm = props => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} id={props.formId}>
+    <Form onSubmit={handleSubmit} id={props.formId} style={props.style}>
       <FormFields
         form={props.form}
         fields={props.fields}

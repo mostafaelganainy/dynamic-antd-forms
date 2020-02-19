@@ -1,6 +1,6 @@
 {
   "name": "dynamic-antd-forms",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "AntD based forms generated from declarative json description",
   "main": "dist/index.js",
   "scripts": {

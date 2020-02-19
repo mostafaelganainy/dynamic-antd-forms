@@ -14,7 +14,7 @@ function DynamicFormFields(props) {
         field =>
           typesMap[field.type] &&
           shouldRenderField(field, props.form.getFieldsValue()) && (
-            <Form.Item key={field.name} label={field.label}>
+            <Form.Item key={field.name} label={field.label} style={field.style}>
               {props.form.getFieldDecorator(field.name, {
                 ...resolveFieldValuePropName(field),
                 rules: getAntDValidationRulesFromOptions(field),
