@@ -7,7 +7,7 @@ import shouldRenderField from "./utils/shouldRenderField";
 import typesMap from "./utils/typesMap";
 import resolveFieldValuePropName from "./utils/resolveFieldValuePropName";
 
-function DynamicFormFields(props) {
+const DynamicFormFields = props => {
   return (
     <React.Fragment>
       {props.fields.map(
@@ -27,6 +27,6 @@ function DynamicFormFields(props) {
       )}
     </React.Fragment>
   );
-}
+};
 
 export default DynamicFormFields;

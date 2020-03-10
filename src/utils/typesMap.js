@@ -25,7 +25,7 @@ const typesMap = {
   TEXTAREA: () => <Input.TextArea rows={4} />,
   SWITCH: () => <Switch />,
   SELECT: field => (
-    <Select>
+    <Select mode={field.mode}>
       {field.options?.map(dataOption => (
         <Select.Option key={dataOption.key} value={dataOption.value}>
           {dataOption.label}

@@ -13,7 +13,7 @@ const ValidationTemplates = {
       if (
         value &&
         value.length > 0 &&
-        !new RegExp("^[a-zA-Z_][a-zA-Z0-9_]*$").test(value)
+        !new RegExp("^[a-zA-Z_][a-zA-Z0-9_]*$").test(value) // TODO: should be dynamic
       ) {
         callback(
           intl.formatMessage(
@@ -29,6 +29,24 @@ const ValidationTemplates = {
       callback();
     }
   }),
+  // MIN: (intl, fieldOptions, validation) => ({
+  //   validator: (rule, value, callback) => {
+  //     if (value) {
+  //       callback();
+  //       return;
+  //     }
+  //     callback();
+  //   }
+  // }),
+  // MAX: (intl, fieldOptions, validation) => ({
+  //   validator: (rule, value, callback) => {
+  //     if (value) {
+  //       callback();
+  //       return;
+  //     }
+  //     callback();
+  //   }
+  // }),
   CUSTOM_VALIDATION: (intl, fieldOptions, validation) => ({
     validator: validation.params.validator
   })
