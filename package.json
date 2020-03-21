@@ -1,20 +1,16 @@
 {
   "name": "dynamic-antd-forms",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "AntD based forms generated from declarative json description",
   "main": "dist/index.js",
   "scripts": {
     "start": "webpack --watch  --mode development",
     "build": "webpack"
   },
-  "author": "Incorta Inc.",
   "repository": "https://github.com/mostafaelganainy/dynamic-antd-forms.git",
   "license": "MIT",
   "peerDependencies": {
     "antd": "^3.22.0",
-    "classnames": "^2.2.6",
-    "lodash": "^4.17.15",
-    "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
@@ -44,6 +40,8 @@
     "webpack-cli": "^3.3.7"
   },
   "dependencies": {
-    "moment": "^2.24.0"
+    "lodash": "^4.17.15",
+    "safe-eval": "^0.4.1",
+    "save": "^2.4.0"
   }
 }
