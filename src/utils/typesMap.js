@@ -6,28 +6,22 @@ import {
   Select,
   TreeSelect,
   Upload,
-  Button,
-  Icon
+  Button
 } from "antd";
-import _ from "lodash";
+import { UploadOutlined } from "@ant-design/icons";
 
 import dummyRequest from "./dummyRequest";
 
 const typesMap = {
   TEXTBOX: () => <Input type="text" />,
   PASSWORD: () => <Input type="password" />,
-  SPINNER_INPUT: field => (
-    <InputNumber
-      min={_.get(field, "fieldParams[0].minValue")}
-      max={_.get(field, "fieldParams[0].maxValue")}
-    />
-  ),
-  TEXTAREA: () => <Input.TextArea rows={4} />,
+  SPINNER_INPUT: () => <InputNumber />,
+  TEXTAREA: () => <Input.TextArea rows={4} />, // TODO: consider supporting resizable and/or dynamic rows
   SWITCH: () => <Switch />,
   SELECT: field => (
     <Select mode={field.mode}>
       {field.options?.map(dataOption => (
-        <Select.Option key={dataOption.key} value={dataOption.value}>
+        <Select.Option key={dataOption.value} value={dataOption.value}>
           {dataOption.label}
         </Select.Option>
       ))}
@@ -37,20 +31,20 @@ const typesMap = {
     <TreeSelect
       treeData={field.treeData}
       placeholder={field.placeholder}
-      treeDefaultExpandAll
+      treeDefaultExpandAll // TODO
     />
   ),
   FILE: field => {
     return (
       <Upload
-        customRequest={dummyRequest} // TODO: leave that for the user to decide
         name={field.name}
+        customRequest={dummyRequest} // TODO: leave that for the user to decide ?
         accept=".csv" // TODO
         beforeUpload={() => true} // TODO
-        multiple={false}
+        multiple={false} // TODO
       >
         <Button>
-          <Icon type="upload" /> Upload CSV
+          <UploadOutlined /> Upload CSV
         </Button>
       </Upload>
     );

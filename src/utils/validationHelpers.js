@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 const ValidationTemplates = {
   REQUIRED: (intl, fieldOptions) => ({
     required: true,
@@ -20,7 +18,7 @@ const ValidationTemplates = {
             { id: "formFields.validations.regexValidationFailed" },
             {
               label: fieldOptions.label,
-              patternLabel: _.lowerCase(validation.params.patternLabel)
+              patternLabel: validation.params.patternLabel?.toLowerCase()
             }
           )
         );

@@ -1,38 +1,30 @@
 import React from "react";
-import _ from "lodash";
 import { Form } from "antd";
 
 import FormFields from "./DynamicFormFields";
-import shouldSubmit from "./utils/shouldSubmit";
 
 const DynamicForm = props => {
-  const handleSubmit = e => {
-    e.preventDefault(); // TODO: should we assume this ??
-    props.form.validateFields();
+  const [form] = Form.useForm();
 
-    if (shouldSubmit(props.form.getFieldsError()))
-      props.onSubmit?.(props.form.getFieldsValue());
+  const onValuesChange = (changedValues, allValues) => {
+    props.onChange?.(allValues);
   };
 
   return (
-    <Form onSubmit={handleSubmit} id={props.formId} style={props.style}>
-      <FormFields
-        form={props.form}
-        fields={props.fields}
-        defaultValues={props.defaultValues}
-      />
+    <Form
+      name={props.name || "nameless_json_form"} // TODO : should name be required ?
+      form={form}
+      onValuesChange={onValuesChange}
+      onFinish={props.onSubmit}
+      id={props.formId}
+      style={props.style}
+      initialValues={
+        props.defaultValues && Object.fromEntries(props.defaultValues)
+      }
+    >
+      <FormFields form={form} fields={props.fields} />
     </Form>
   );
 };
 
-export default Form.create({
-  name: "data_source_form",
-  onValuesChange: (props, changedValues, allValues) => {
-    props.onChange?.(allValues);
-  },
-  onFieldsChange: (props, changedFields, allFields) => {
-    const fieldsKeyValue = Object.entries(allFields);
-    const predicate = field => _.get(field, "[1].errors.length") > 0;
-    props.onErrors?.(fieldsKeyValue.filter(predicate).map(field => field[1]));
-  }
-})(DynamicForm);
+export default DynamicForm;
