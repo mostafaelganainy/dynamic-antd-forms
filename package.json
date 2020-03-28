@@ -28,9 +28,9 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "react-json-forms",
+  "name": "dynamic-antd-forms",
   "author": "bahaa-al-deen",
-  "module": "dist/react-json-forms.esm.js",
+  "module": "dist/dynamic-antd-forms.esm.js",
   "repository": "https://github.com/mostafaelganainy/dynamic-antd-forms.git",
   "devDependencies": {
     "@types/jest": "^25.1.4",
