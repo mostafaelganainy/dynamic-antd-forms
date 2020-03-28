@@ -25,7 +25,6 @@ export type Field = {
   name: string;
   label: string;
   type: FieldType;
-  defaultValue: any;
   validations: FieldValidation[];
   fieldParams: any;
   dependencyExpression: string;
@@ -35,4 +34,5 @@ export type Field = {
   treeData: any; // TODO: ??
   placeholder: string;
   renderer: any;
+  key: string;
 };

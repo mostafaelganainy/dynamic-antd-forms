@@ -6,9 +6,11 @@ const shouldRenderField = (field: Field, allFormValues: any) => {
     try {
       return saferEval(field.dependencyExpression, allFormValues);
     } catch {
-      console.error(
-        "dependency expression parse failure \n make sure fields that are depended on have 'defaultValue'"
-      );
+      if (process.env.NODE_ENV === 'development') {
+        console.error(
+          'Dependency expression parse failure \n Field will get rendered anyway \n Make sure fields that are depended on have a default value'
+        );
+      }
       return true;
     }
   }
