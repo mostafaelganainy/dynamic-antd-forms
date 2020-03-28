@@ -1,9 +1,10 @@
-import safeEval from "safe-eval";
+import saferEval from 'safer-eval';
+import { Field } from '../types';
 
-export const shouldRenderField = (field, allFormValues) => {
+const shouldRenderField = (field: Field, allFormValues: any) => {
   if (field.dependencyExpression) {
     try {
-      return safeEval(field.dependencyExpression, allFormValues);
+      return saferEval(field.dependencyExpression, allFormValues);
     } catch {
       console.error(
         "dependency expression parse failure \n make sure fields that are depended on have 'defaultValue'"
@@ -13,3 +14,5 @@ export const shouldRenderField = (field, allFormValues) => {
   }
   return true;
 };
+
+export default shouldRenderField;

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Input,
   Switch,
@@ -6,35 +6,37 @@ import {
   Select,
   TreeSelect,
   Upload,
-  Button
-} from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+  Button,
+} from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
-import dummyRequest from "./dummyRequest";
+import dummyRequest from './dummyRequest';
+import { Field } from '../types';
 
-const typesMap = {
+const typesMap: any = {
   TEXTBOX: () => <Input type="text" />,
   PASSWORD: () => <Input type="password" />,
   SPINNER_INPUT: () => <InputNumber />,
   TEXTAREA: () => <Input.TextArea rows={4} />, // TODO: consider supporting resizable and/or dynamic rows
   SWITCH: () => <Switch />,
-  SELECT: field => (
+  SELECT: (field: Field) => (
+    // TODO: field.mode is awful and should be moved to field.params or something
     <Select mode={field.mode}>
-      {field.options?.map(dataOption => (
+      {field.options?.map((dataOption: any) => (
         <Select.Option key={dataOption.value} value={dataOption.value}>
           {dataOption.label}
         </Select.Option>
       ))}
     </Select>
   ),
-  TREE_SELECT: field => (
+  TREE_SELECT: (field: Field) => (
     <TreeSelect
       treeData={field.treeData}
       placeholder={field.placeholder}
       treeDefaultExpandAll // TODO
     />
   ),
-  FILE: field => {
+  FILE: (field: Field) => {
     return (
       <Upload
         name={field.name}
@@ -49,7 +51,7 @@ const typesMap = {
       </Upload>
     );
   },
-  CUSTOM: (field, fieldsValue) => {
+  CUSTOM: (field: Field, fieldsValue: any) => {
     return field.renderer(field, fieldsValue);
   },
   SUBMIT_BUTTON: () => {
@@ -58,7 +60,7 @@ const typesMap = {
         Submit
       </Button>
     );
-  }
+  },
 };
 
 export default typesMap;
