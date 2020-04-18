@@ -1,6 +1,6 @@
 # Dynamic AntD Forms
 
-This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
+A simple solution to server defined forms using react + ant.design.
 
 ## Local Development
 
