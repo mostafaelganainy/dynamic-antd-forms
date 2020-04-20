@@ -14,14 +14,22 @@ import dummyRequest from './dummyRequest';
 import { Field } from '../types';
 
 const typesMap: any = {
-  TEXTBOX: () => <Input type="text" />,
-  PASSWORD: () => <Input type="password" />,
-  SPINNER_INPUT: () => <InputNumber />,
-  TEXTAREA: () => <Input.TextArea rows={4} />, // TODO: consider supporting resizable and/or dynamic rows
-  SWITCH: () => <Switch />,
+  TEXTBOX: (field: Field) => (
+    <Input type="text" defaultValue={field.defaultValue} />
+  ),
+  PASSWORD: (field: Field) => (
+    <Input type="password" defaultValue={field.defaultValue} />
+  ),
+  SPINNER_INPUT: (field: Field) => (
+    <InputNumber defaultValue={field.defaultValue} />
+  ),
+  TEXTAREA: (field: Field) => (
+    <Input.TextArea rows={4} defaultValue={field.defaultValue} />
+  ), // TODO: consider supporting resizable and/or dynamic rows
+  SWITCH: (field: Field) => <Switch defaultChecked={field.defaultValue} />,
   SELECT: (field: Field) => (
     // TODO: field.mode is awful and should be moved to field.params or something
-    <Select mode={field.mode}>
+    <Select mode={field.mode} defaultValue={field.defaultValue}>
       {field.options?.map((dataOption: any) => (
         <Select.Option key={dataOption.value} value={dataOption.value}>
           {dataOption.label}
@@ -31,6 +39,7 @@ const typesMap: any = {
   ),
   TREE_SELECT: (field: Field) => (
     <TreeSelect
+      defaultValue={field.defaultValue}
       treeData={field.treeData}
       placeholder={field.placeholder}
       treeDefaultExpandAll // TODO

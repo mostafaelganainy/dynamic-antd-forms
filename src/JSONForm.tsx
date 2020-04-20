@@ -37,7 +37,7 @@ const JSONForm = (props: JsonFormProps) => {
 
   return (
     <Form
-      name={props.name || 'nameless_json_form'} // TODO : should name be required ?
+      name={props.name}
       form={form}
       onValuesChange={onValuesChange}
       onFinish={props.onSubmit}
