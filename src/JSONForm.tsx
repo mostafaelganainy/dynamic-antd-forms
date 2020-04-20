@@ -9,13 +9,13 @@ import resolveFieldValuePropName from './utils/resolveFieldValuePropName';
 
 export interface JsonFormProps {
   name: string;
-  form: any;
+  form?: any;
   fields: Field[];
   onSubmit: any;
-  onChange: any;
-  formId: string;
-  style: any;
-  defaultValues: any;
+  onChange?: any;
+  formId?: string;
+  style?: any;
+  defaultValues?: any;
 }
 
 const JSONForm = (props: JsonFormProps) => {
