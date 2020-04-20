@@ -31,4 +31,5 @@ export type Field = {
   placeholder?: string;
   renderer?: any;
   key?: string;
+  lolo?: any;
 };
